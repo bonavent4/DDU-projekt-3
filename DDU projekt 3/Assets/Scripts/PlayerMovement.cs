@@ -22,6 +22,17 @@ public class PlayerMovement : MonoBehaviour
         targetPosition.z = transform.position.z;
 
         // Move the player towards the mouse position
+        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        Vector3 moveDirection = targetPosition - transform.position;
+
+        // Rotate the player to face the mouse direction
+        if (moveDirection != Vector3.zero)
+        {
+            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        // Move the player towards the mouse position
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 }
