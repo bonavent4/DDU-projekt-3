@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 40f; // ajust the speed
+    public float dashSpeed = 50f; // ajust the speed of the dash
     public float dashDistance = 70f;
     private Camera MainCamera;
     private bool isDashing = false;
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (isDashing)
         {
-            transform.position = Vector3.MoveTowards(transform.position, dashTarget, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, dashTarget, dashSpeed * Time.deltaTime);
             if (transform.position == dashTarget)
                 isDashing = false;
         }
