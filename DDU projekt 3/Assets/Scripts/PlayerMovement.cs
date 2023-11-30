@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             // Move the player towards the mouse position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             //dash/attack
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log("the mouse buttion is being held down.");
 
