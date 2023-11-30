@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  dashDistance: 10
+  dashDistance: 5
 --- !u!212 &842279057
 SpriteRenderer:
   m_ObjectHideFlags: 0
