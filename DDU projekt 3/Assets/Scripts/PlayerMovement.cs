@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 40f; // ajust the speed
+    public float dashDistance = 70f;
     private Camera MainCamera;
+    private bool isDashing = false;
+    private Vector3 dashTarget;
 
     // Start is called before the first frame update
     private void Start()
@@ -31,8 +34,33 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+        if (isDashing)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, dashTarget, moveSpeed * Time.deltaTime);
+            if (transform.position == dashTarget)
+                isDashing = false;
+        }
+        else
+        {
+            // Move the player towards the mouse position
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            //dash/attack
+            if (Input.GetMouseButton(0))
+            {
+                Debug.Log("the mouse buttion is being held down.");
 
-        // Move the player towards the mouse position
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                // Get the mouse position in the world space
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = transform.position.z; // Ensure the z-coordinate remains the same as the player
+
+                // Calculate the direction from the player to the mouse position
+                Vector3 dashDirection = (mousePos - transform.position).normalized;
+
+                // Set the target position for dashing by adding dashDistance in the calculated direction
+                dashTarget = transform.position + dashDirection * dashDistance;
+                isDashing = true;
+            }
+        }
+
     }
 }

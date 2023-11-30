@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  dashDistance: 10
 --- !u!212 &842279057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -317,7 +318,7 @@ GameObject:
   - component: {fileID: 1689360200}
   - component: {fileID: 1689360201}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
