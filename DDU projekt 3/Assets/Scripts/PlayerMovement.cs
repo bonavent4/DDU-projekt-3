@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // ajustthe speed
+    public float moveSpeed = 40f; // ajust the speed
     private Camera MainCamera;
 
     // Start is called before the first frame update
