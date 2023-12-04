@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera MainCamera;
     private bool isDashing = false;
     private Vector3 dashTarget;
+    public Animator anim;
 
     // Start is called before the first frame update
     private void Start()
@@ -60,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
                 // Set the target position for dashing by adding dashDistance in the calculated direction
                 dashTarget = transform.position + dashDirection * dashDistance;
                 isDashing = true;
+
+                anim.SetTrigger("draw");
             }
         }
 
