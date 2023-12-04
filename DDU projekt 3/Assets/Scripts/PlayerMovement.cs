@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     private Vector3 dashTarget;
     public Animator anim;
+    public Animator playerAnim;
 
     // Start is called before the first frame update
     private void Start()
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
                 isDashing = true;
 
                 anim.SetTrigger("draw");
+                playerAnim.SetTrigger("dash");
             }
         }
 
