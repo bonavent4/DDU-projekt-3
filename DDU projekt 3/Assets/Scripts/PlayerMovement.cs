@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 40f; // ajust the speed
     public float dashSpeed = 50f; // ajust the speed of the dash
     public float dashDistance = 70f;
+    public float dashCooldown = 2f;
+    private float nextDashTime = 0f;
     private Camera MainCamera;
     private bool isDashing = false;
     private Vector3 dashTarget;
@@ -48,9 +50,11 @@ public class PlayerMovement : MonoBehaviour
             // Move the player towards the mouse position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             //dash/attack
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextDashTime)
             {
                 Debug.Log("the mouse buttion is being held down.");
+
+                nextDashTime = Time.time + dashCooldown;
 
                 // Get the mouse position in the world space
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
