@@ -158,6 +158,7 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeed: 50
   dashDistance: 3
+  dashCooldown: 1
   anim: {fileID: 1119953362}
   playerAnim: {fileID: 842279060}
 --- !u!212 &842279057
