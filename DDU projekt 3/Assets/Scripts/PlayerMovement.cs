@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
             float fillAmount = CooldownTimer / dashCooldown;
 
-            dashCooldown.fillAmount = 1 - fillAmount;
+            
         }
         else
         {
