@@ -17,10 +17,12 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
     public Animator playerAnim;
     public Image dashCooldownBar;
+    private Vector3 originalScale;
 
     // Start is called before the first frame update
     private void Start()
     {
+        originalScale = dashCooldownBar.rectTransform.localScale;
         MainCamera = Camera.main;
     }
 
@@ -77,15 +79,19 @@ public class PlayerMovement : MonoBehaviour
         if (Time.time < nextDashTime)
         {
             CooldownTimer = nextDashTime - Time.time;
-
             float fillAmount = CooldownTimer / dashCooldown;
 
-            
+            /*Vector3 newScale = new Vector3(fillAmount, 1f, 1f);
+            dashCooldownBar.rectTransform.localScale = Vector3.Lerp(originalScale, newScale, fillAmount);*/
+            // Scale the image's x-axis to represent the cooldown progress
+            float newScaleX = Mathf.Lerp(0f, 1f, fillAmount);
+            dashCooldownBar.rectTransform.localScale = new Vector3(newScaleX, originalScale.y, originalScale.z);
+
         }
         else
         {
             CooldownTimer = 0f;
-            dashCooldownBar.fillAmount = 0f;
+            dashCooldownBar.rectTransform.localScale = originalScale;
         }
 
     }

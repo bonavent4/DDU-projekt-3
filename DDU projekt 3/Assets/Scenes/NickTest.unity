@@ -161,6 +161,7 @@ MonoBehaviour:
   dashCooldown: 1
   anim: {fileID: 1119953362}
   playerAnim: {fileID: 842279060}
+  dashCooldownBar: {fileID: 1902003603}
 --- !u!212 &842279057
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -572,7 +573,7 @@ GameObject:
   - component: {fileID: 1902003604}
   - component: {fileID: 1902003603}
   m_Layer: 5
-  m_Name: DashCoolDownBar
+  m_Name: dashCooldownBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -593,11 +594,11 @@ RectTransform:
   m_Father: {fileID: 1588522787}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -677, y: -490}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.018000001, y: 0.029000001}
+  m_AnchorMax: {x: 0.27775, y: 0.029000001}
+  m_AnchoredPosition: {x: 2.999939, y: 19.000427}
+  m_SizeDelta: {x: -398, y: 100}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1902003603
 MonoBehaviour:
   m_ObjectHideFlags: 0
