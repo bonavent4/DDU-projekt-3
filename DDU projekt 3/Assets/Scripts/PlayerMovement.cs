@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class PlayerMovement : MonoBehaviour
     public float dashDistance = 70f;
     public float dashCooldown = 2f;
     private float nextDashTime = 0f;
+    private float CooldownTimer = 0f;
     private Camera MainCamera;
     private bool isDashing = false;
     private Vector3 dashTarget;
     public Animator anim;
     public Animator playerAnim;
+
+    public Image DashCoolDownBar;
 
     // Start is called before the first frame update
     private void Start()
@@ -70,6 +74,19 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetTrigger("draw");
                 playerAnim.SetTrigger("dash");
             }
+        }
+        if (Time.time < nextDashTime)
+        {
+            CooldownTimer = nextDashTime - Time.time;
+
+            float fillAmount = CooldownTimer / dashCooldown;
+
+            dashCooldown.fillAmount = 1 - fillAmount;
+        }
+        else
+        {
+            CooldownTimer = 0f;
+            DashCoolDownBar.fillAmount = 0f;
         }
 
     }
