@@ -9,8 +9,10 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed = 50f; // ajust the speed of the dash
     public float dashDistance = 70f;
     public float dashCooldown = 2f;
+    public int consecutiveDashesToCooldown = 3;
     private float nextDashTime = 0f;
     private float CooldownTimer = 0f;
+    private int consecutiveDashes = 0;
     private Camera MainCamera;
     private bool isDashing = false;
     private Vector3 dashTarget;
@@ -57,6 +59,16 @@ public class PlayerMovement : MonoBehaviour
             //dash/attack
             if (Input.GetMouseButtonDown(0) && Time.time >= nextDashTime)
             {
+                if (consecutiveDashes >= consecutiveDashesToCooldown)
+                {
+                    nextDashTime = Time.time + dashCooldown;
+                    consecutiveDashes = 0; // Reset consecutive dashes
+                }
+                else
+                {
+                    consecutiveDashes++;
+                }
+
                 Debug.Log("the mouse buttion is being held down.");
 
                 nextDashTime = Time.time + dashCooldown;
@@ -80,10 +92,6 @@ public class PlayerMovement : MonoBehaviour
         {
             CooldownTimer = nextDashTime - Time.time;
             float fillAmount = CooldownTimer / dashCooldown;
-
-            /*Vector3 newScale = new Vector3(fillAmount, 1f, 1f);
-            dashCooldownBar.rectTransform.localScale = Vector3.Lerp(originalScale, newScale, fillAmount);*/
-            // Scale the image's x-axis to represent the cooldown progress
             float newScaleX = Mathf.Lerp(0f, 1f, fillAmount);
             dashCooldownBar.rectTransform.localScale = new Vector3(newScaleX, originalScale.y, originalScale.z);
 

@@ -158,7 +158,8 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeed: 50
   dashDistance: 3
-  dashCooldown: 1
+  dashCooldown: 0.2
+  consecutiveDashesToCooldown: 3
   anim: {fileID: 1119953362}
   playerAnim: {fileID: 842279060}
   dashCooldownBar: {fileID: 1902003603}
