@@ -16,8 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 dashTarget;
     public Animator anim;
     public Animator playerAnim;
-
-    public Image DashCoolDownBar;
+    public Image dashCooldownBar;
 
     // Start is called before the first frame update
     private void Start()
@@ -86,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             CooldownTimer = 0f;
-            DashCoolDownBar.fillAmount = 0f;
+            dashCooldownBar.fillAmount = 0f;
         }
 
     }
