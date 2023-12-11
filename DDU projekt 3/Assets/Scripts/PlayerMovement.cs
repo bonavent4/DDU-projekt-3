@@ -8,11 +8,12 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 40f; // ajust the speed
     public float dashSpeed = 50f; // ajust the speed of the dash
     public float dashDistance = 70f;
-    public float dashCooldown = 2f;
-    public int consecutiveDashesToCooldown = 3;
+    public float dashCooldown = 0.5f;
+    public int consecutiveDashesToCooldown = 6;
     private float nextDashTime = 0f;
     private float CooldownTimer = 0f;
     private int consecutiveDashes = 0;
+    private bool canDash = true;
     private Camera MainCamera;
     private bool isDashing = false;
     private Vector3 dashTarget;
@@ -57,17 +58,8 @@ public class PlayerMovement : MonoBehaviour
             // Move the player towards the mouse position
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             //dash/attack
-            if (Input.GetMouseButtonDown(0) && Time.time >= nextDashTime)
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextDashTime && canDash)
             {
-                if (consecutiveDashes >= consecutiveDashesToCooldown)
-                {
-                    nextDashTime = Time.time + dashCooldown;
-                    consecutiveDashes = 0; // Reset consecutive dashes
-                }
-                else
-                {
-                    consecutiveDashes++;
-                }
 
                 Debug.Log("the mouse buttion is being held down.");
 
@@ -86,8 +78,24 @@ public class PlayerMovement : MonoBehaviour
 
                 anim.SetTrigger("draw");
                 playerAnim.SetTrigger("dash");
+
+                consecutiveDashes++;
+
+                if (consecutiveDashes >= consecutiveDashesToCooldown)
+                {
+                    canDash = false; // Disable futher dashing
+                    Debug.Log("can't dash anymore until cooldown");
+                    nextDashTime = Time.time + dashCooldown;
+                }
             }
         }
+        if (!canDash && Time.time >= nextDashTime)
+        {
+            canDash = true;
+            consecutiveDashes = 0;
+            Debug.Log("can't dash agian");
+        }
+
         if (Time.time < nextDashTime)
         {
             CooldownTimer = nextDashTime - Time.time;
