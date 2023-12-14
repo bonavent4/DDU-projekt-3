@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float nextDashTime = 0f;
     private float CooldownTimer = 0f;
     private int consecutiveDashes = 0;
+    
     private bool canDash = true;
     private Camera MainCamera;
     private bool isDashing = false;
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
                 Debug.Log("the mouse buttion is being held down.");
 
-                nextDashTime = Time.time + dashCooldown;
+                //nextDashTime = Time.time + dashCooldown;
 
                 // Get the mouse position in the world space
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
