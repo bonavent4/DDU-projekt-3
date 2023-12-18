@@ -13,6 +13,7 @@ public class ShapesMovement : MonoBehaviour
     private void Awake()
     {
         anim = gameObject.GetComponent<Animator>();
+        Home = FindObjectOfType<TheManager>().gameObject;
     }
     void Update()
     {
@@ -33,7 +34,8 @@ public class ShapesMovement : MonoBehaviour
     public void startMoving()
     {
         move = true;
-        Invoke("startanim", 3);
+        Invoke("startanim", Home.GetComponent<TheManager>().lengthFromOriginalShape / speed - 0.16666667f);
+        Debug.Log(Home.GetComponent<TheManager>().lengthFromOriginalShape / speed - 0.16666667f);
     }
     void startanim()
     {
