@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     public Image dashCooldownBar;
     private Vector3 originalScale;
 
+    RaycastHit2D hit;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && Time.time >= nextDashTime && canDash)
             {
 
-                Debug.Log("the mouse buttion is being held down.");
+               // Debug.Log("the mouse buttion is being held down.");
 
                 //nextDashTime = Time.time + dashCooldown;
 
@@ -82,10 +84,24 @@ public class PlayerMovement : MonoBehaviour
 
                 consecutiveDashes++;
 
+                // check if you hit a shape and where it got hit.
+                hit = Physics2D.Linecast(gameObject.transform.position, dashTarget);
+                if (hit != false && hit.collider.gameObject.GetComponent<ShapesMovement>())
+                {
+                    if (Quaternion.FromToRotation(Vector3.up, hit.normal).eulerAngles == new Vector3(0,0, hit.collider.gameObject.transform.rotation.eulerAngles.z))
+                    {
+                        hit.collider.gameObject.GetComponent<ShapesMovement>().SplitBoxInHalf();
+                        //Debug.Log(hit.normal);
+                        
+                    }
+                    // Debug.Log(Quaternion.FromToRotation(Vector3.up, hit.normal).eulerAngles + "  ::  " + new Vector3(0, 0, hit.collider.gameObject.transform.rotation.z));
+                    
+                }
+
                 if (consecutiveDashes >= consecutiveDashesToCooldown)
                 {
                     canDash = false; // Disable futher dashing
-                    Debug.Log("can't dash anymore until cooldown");
+                   // Debug.Log("can't dash anymore until cooldown");
                     nextDashTime = Time.time + dashCooldown;
                 }
             }
@@ -94,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         {
             canDash = true;
             consecutiveDashes = 0;
-            Debug.Log("can't dash agian");
+          //  Debug.Log("can't dash agian");
         }
 
         if (Time.time < nextDashTime)

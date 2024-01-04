@@ -49,7 +49,7 @@ public class TheManager : MonoBehaviour
         {
             float length = Mathf.Sqrt((saveObject.StartPoints[i].x * saveObject.StartPoints[i].x) + (saveObject.StartPoints[i].y * saveObject.StartPoints[i].y));
             float percentage = lengthFromOriginalShape / length;
-            Debug.Log(percentage);
+           // Debug.Log(percentage);
 
             Vector2 offset = new Vector2(saveObject.StartPoints[i].x * percentage, saveObject.StartPoints[i].y * percentage);
 
@@ -57,10 +57,11 @@ public class TheManager : MonoBehaviour
 
             ShapesInAction[i] = g;
 
-            Invoke("SpawnShape", saveObject.TimeToSpawn[i]);
+            Invoke("SpawnShape", saveObject.TimeToSpawn[i] - 0.1666667f);
         }
         WWW www = new WWW(Application.streamingAssetsPath + "/SongsData/" + saveObject.mp3File);
         music.clip = NAudioPlayer.FromMp3Data(www.bytes);
+        
         Invoke("StartMusic", 5.5f);
 
     }
