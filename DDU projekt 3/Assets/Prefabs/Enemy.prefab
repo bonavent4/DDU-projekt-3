@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7119924258253877425}
   - component: {fileID: 6911997184408098257}
   - component: {fileID: 7026428179462587268}
+  - component: {fileID: 6630212399537239847}
   m_Layer: 0
   m_Name: boxHalf
   m_TagString: Untagged
@@ -106,6 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6630212399537239847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532166175448748364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b5efa86aea5d04e8c7fbe775d1ac80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxDestroyed: 0
 --- !u!1 &1542812869899685227
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +242,7 @@ GameObject:
   - component: {fileID: 2426744102149925305}
   - component: {fileID: 2360118906125173632}
   - component: {fileID: 2970023964471493251}
+  - component: {fileID: 592440108917692473}
   m_Layer: 0
   m_Name: boxHalf (1)
   m_TagString: Untagged
@@ -323,6 +338,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &592440108917692473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021757247669754125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b5efa86aea5d04e8c7fbe775d1ac80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxDestroyed: 0
 --- !u!1 &2144529578460569427
 GameObject:
   m_ObjectHideFlags: 0

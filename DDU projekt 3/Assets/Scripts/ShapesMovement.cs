@@ -53,6 +53,7 @@ public class ShapesMovement : MonoBehaviour
             g.transform.parent = null;
             Vector3 direction = (g.transform.position - transform.position).normalized;
             g.GetComponent<Rigidbody2D>().AddForce(direction * force);
+            g.GetComponent<BoxPieces>().boxDestroyed = true;
         }
         Destroy(gameObject);
     }

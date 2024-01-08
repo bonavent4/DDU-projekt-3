@@ -21,6 +21,12 @@ public class TheManager : MonoBehaviour
     int currentNumber = 0;
 
      SaveObject saveObject;
+
+    [SerializeField] GameObject[] livesImages;
+    [SerializeField] TextMeshProUGUI pointText;
+    int health;
+    int points;
+
     private void Awake()
     {
         var fileinfo = new DirectoryInfo(Application.streamingAssetsPath + "/SongsData").GetFiles("*.txt");
@@ -80,5 +86,16 @@ public class TheManager : MonoBehaviour
         public List<float> TimeToSpawn = new List<float>();
         public List<int> WhichShapeToSpawn = new List<int>();
 
+    }
+
+    public void LoseHealth()
+    {
+        health -= 1;
+        Destroy(livesImages[health - 1]);
+    }
+    public void GainPoints(int pointsToGain)
+    {
+        points += pointsToGain;
+        pointText.text = "Points: " + points.ToString();
     }
 }

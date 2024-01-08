@@ -23,13 +23,16 @@ public class PlayerMovement : MonoBehaviour
     public Image dashCooldownBar;
     private Vector3 originalScale;
 
-    RaycastHit2D hit;
+    RaycastHit2D[] hit;
+
+    TheManager manager;
 
     // Start is called before the first frame update
     private void Start()
     {
         originalScale = dashCooldownBar.rectTransform.localScale;
         MainCamera = Camera.main;
+        manager = FindObjectOfType<TheManager>();
     }
 
     // Update is called once per frame
@@ -73,7 +76,9 @@ public class PlayerMovement : MonoBehaviour
                 mousePos.z = transform.position.z; // Ensure the z-coordinate remains the same as the player
 
                 // Calculate the direction from the player to the mouse position
-                Vector3 dashDirection = (mousePos - transform.position).normalized;
+                // Vector3 dashDirection = (mousePos - transform.position).normalized;
+                //ændrede den til transform.right så den er mere end 0 når spilleren er ved musens position
+                Vector3 dashDirection = transform.right;
 
                 // Set the target position for dashing by adding dashDistance in the calculated direction
                 dashTarget = transform.position + dashDirection * dashDistance;
@@ -85,15 +90,22 @@ public class PlayerMovement : MonoBehaviour
                 consecutiveDashes++;
 
                 // check if you hit a shape and where it got hit.
-                hit = Physics2D.Linecast(gameObject.transform.position, dashTarget);
-                if (hit != false && hit.collider.gameObject.GetComponent<ShapesMovement>())
+                hit = Physics2D.LinecastAll(gameObject.transform.position, dashTarget);
+                if (hit.Length != 0)
                 {
-                    if (Quaternion.FromToRotation(Vector3.up, hit.normal).eulerAngles == new Vector3(0,0, hit.collider.gameObject.transform.rotation.eulerAngles.z))
+                    foreach (RaycastHit2D h in hit)
                     {
-                        hit.collider.gameObject.GetComponent<ShapesMovement>().SplitBoxInHalf();
-                        //Debug.Log(hit.normal);
-                        
+                        if (h.collider.gameObject.GetComponent<ShapesMovement>())
+                        {
+                            if (Quaternion.FromToRotation(Vector3.up, h.normal).eulerAngles == new Vector3(0, 0, h.collider.gameObject.transform.rotation.eulerAngles.z))
+                            {
+                                h.collider.gameObject.GetComponent<ShapesMovement>().SplitBoxInHalf();
+                                //Debug.Log(hit.normal);
+                                manager.GainPoints(100);
+                            }
+                        }
                     }
+                   
                     // Debug.Log(Quaternion.FromToRotation(Vector3.up, hit.normal).eulerAngles + "  ::  " + new Vector3(0, 0, hit.collider.gameObject.transform.rotation.z));
                     
                 }
