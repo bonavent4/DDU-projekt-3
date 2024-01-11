@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField]int sceneNumber;
     // Start is called before the first frame update
-    [SerializeField] GameObject exitButton;
+   // [SerializeField] GameObject exitButton;
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
-        EnableExitButton();
-    }
-    public void PlaySongScene()
+       // EnableExitButton();
+    }*/
+    public void LoadTheScene()
     {
-       SceneManager.LoadScene(2);
+       SceneManager.LoadScene(sceneNumber);
 
     }
-    public void PlayEditScene()
+    /*public void PlayEditScene()
     {
         SceneManager.LoadScene(1);
 
@@ -27,8 +28,8 @@ public class MainMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(0);
 
-    }
-    public void EnableExitButton()
+    }/*
+   /* public void EnableExitButton()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -43,7 +44,7 @@ public class MainMenuScript : MonoBehaviour
         }
         
 
-    }
+    }*/
 
 
 }

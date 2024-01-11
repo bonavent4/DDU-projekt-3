@@ -13,6 +13,8 @@ public class ShapesMovement : MonoBehaviour
 
     [SerializeField] GameObject[] boxParts;
     [SerializeField] float force;
+
+    public bool isGreen;
     private void Awake()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -29,7 +31,9 @@ public class ShapesMovement : MonoBehaviour
             }
             else
             {
-              //  Debug.Log("hit home");
+                //  Debug.Log("hit home");
+                Home.GetComponent<TheManager>().LoseHealth();
+                Destroy(gameObject);
             }
         }
     }
@@ -56,6 +60,15 @@ public class ShapesMovement : MonoBehaviour
             g.GetComponent<BoxPieces>().boxDestroyed = true;
         }
         Destroy(gameObject);
+    }
+
+    void GoGreen()
+    {
+        isGreen = true;
+    }
+    void GoBack()
+    {
+        isGreen = false;
     }
 }
 
