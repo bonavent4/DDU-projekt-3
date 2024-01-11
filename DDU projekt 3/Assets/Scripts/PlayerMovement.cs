@@ -117,8 +117,7 @@ public class PlayerMovement : MonoBehaviour
                         {
                             if (h.collider.gameObject.GetComponent<ShapesMovement>())
                             {
-                                Debug.Log(Quaternion.FromToRotation(Vector3.up, h.normal).eulerAngles.z + " : " + h.collider.gameObject.transform.rotation.eulerAngles.z);
-                                if (Quaternion.FromToRotation(Vector3.up, h.normal).eulerAngles.z >= h.collider.gameObject.transform.rotation.eulerAngles.z-1 && Quaternion.FromToRotation(Vector3.up, h.normal).eulerAngles.z <= h.collider.gameObject.transform.rotation.eulerAngles.z +1)
+                                if (Quaternion.FromToRotation(Vector3.up, h.normal).eulerAngles == new Vector3(0, 0, h.collider.gameObject.transform.rotation.eulerAngles.z))
                                 {
                                     h.collider.gameObject.GetComponent<ShapesMovement>().SplitBoxInHalf();
                                     //Debug.Log(hit.normal);
