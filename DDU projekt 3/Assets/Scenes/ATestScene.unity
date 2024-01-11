@@ -1115,7 +1115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &796034648
 Transform:
   m_ObjectHideFlags: 0
@@ -4106,6 +4106,7 @@ MonoBehaviour:
   canMove: 1
   swordSway: {fileID: 2029594962}
   swordCling: {fileID: 2029594961}
+  distanceFromMouse: 0.3
 --- !u!212 &2029594958
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4201,7 +4202,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ae12c054500bb3c4a883887bd7613b2b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 439d3625aa32c2540a4424c6efeabf49, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

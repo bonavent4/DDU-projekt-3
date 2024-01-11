@@ -15,6 +15,8 @@ public class ShapesMovement : MonoBehaviour
     [SerializeField] float force;
 
     public bool isGreen;
+
+    [SerializeField] GameObject SlashTrail;
     private void Awake()
     {
         anim = gameObject.GetComponent<Animator>();
@@ -50,7 +52,9 @@ public class ShapesMovement : MonoBehaviour
     }
     public void SplitBoxInHalf()
     {
-        
+        SlashTrail.GetComponent<Animator>().SetTrigger("Slash");
+        SlashTrail.transform.parent = null;
+        Invoke("destroyTrail", 3);
         foreach (GameObject g in boxParts)
         {
             g.SetActive(true);
@@ -60,6 +64,10 @@ public class ShapesMovement : MonoBehaviour
             g.GetComponent<BoxPieces>().boxDestroyed = true;
         }
         Destroy(gameObject);
+    }
+    void destroyTrail()
+    {
+
     }
 
     void GoGreen()

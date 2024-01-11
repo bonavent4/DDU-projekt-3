@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource swordCling;
 
     // Start is called before the first frame update
+
+    [SerializeField] float distanceFromMouse;
     private void Start()
     {
         dashesLeft = consecutiveDashesToCooldown;
@@ -75,7 +77,11 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 // Move the player towards the mouse position
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                if(Vector3.Distance(transform.position, targetPosition) > distanceFromMouse)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                }
+                
                 //dash/attack
                 if (Input.GetMouseButtonDown(0) && dashesLeft != 0)
                 {
