@@ -717,6 +717,8 @@ MonoBehaviour:
   music: {fileID: 781527567}
   DifferentShapes:
   - {fileID: 2462179050764629308, guid: 88bd678b517713b4f810721563f868a7, type: 3}
+  - {fileID: 6442640709102963276, guid: 782685ef746eb25429df7126c3c14034, type: 3}
+  - {fileID: 2117011035353576107, guid: 5026395ab8f79634aa972c5f5123fef8, type: 3}
   StartMenu: {fileID: 1467836062}
   deadMenu: {fileID: 240679928}
   everythingElse: {fileID: 2029202925}

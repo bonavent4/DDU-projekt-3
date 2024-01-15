@@ -262,6 +262,9 @@ MonoBehaviour:
   XMax: 461.0064
   littleThingPrefab: {fileID: 4203859603089945725, guid: 69de37bba7a0d874ca60b85111c0a42a, type: 3}
   littleThingParent: {fileID: 922157512}
+  shapeSprites:
+  - {fileID: 3139504726514950054, guid: 945a601bdbd91f84a833d766009ad642, type: 3}
+  - {fileID: 2084368408580630333, guid: f446cf09ff31ef74b984b42bee02d4ac, type: 3}
 --- !u!82 &94095434
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5587,7 +5590,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 75e5441e6af919b4b8dafdf7db87e16f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

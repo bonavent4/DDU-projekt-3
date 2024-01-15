@@ -52,6 +52,8 @@ public class LevelEditor : MonoBehaviour
     [SerializeField] GameObject littleThingPrefab;
     [SerializeField] GameObject littleThingParent;
 
+    [SerializeField] GameObject[] shapeSprites;
+
     SaveObject saveObject = new SaveObject
     {
         /* StartPoints = startPoints,
@@ -155,6 +157,18 @@ public class LevelEditor : MonoBehaviour
                 Destroy(littleThings[number]);
                 littleThings.Remove(littleThings[number]);
                 
+            }
+            else if(hit.collider != null && hit.collider.gameObject.CompareTag("triangle"))
+            {
+                int number = testShapes.IndexOf(hit.collider.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject);
+                hit.collider.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<SpriteRenderer>().sprite = shapeSprites[0].GetComponent<SpriteRenderer>().sprite;
+                saveObject.WhichShapeToSpawn[number] = 1;
+            }
+            else if (hit.collider != null && hit.collider.gameObject.CompareTag("sixThingy"))
+            {
+                int number = testShapes.IndexOf(hit.collider.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject);
+                hit.collider.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<SpriteRenderer>().sprite = shapeSprites[1].GetComponent<SpriteRenderer>().sprite;
+                saveObject.WhichShapeToSpawn[number] = 2;
             }
             else if (hit.collider != null && hit.collider.GetComponent<EditShape>())
             {
@@ -299,7 +313,12 @@ public class LevelEditor : MonoBehaviour
 
             for (int i = 0; i < saveObject.TimeToSpawn.Count; i++)
             {
-                testShapes.Add(Instantiate(DifferentShapes[saveObject.WhichShapeToSpawn[i]], saveObject.StartPoints[i], Quaternion.Euler(0,0,saveObject.Rotation[i])));
+                testShapes.Add(Instantiate(DifferentShapes[0], saveObject.StartPoints[i], Quaternion.Euler(0,0,saveObject.Rotation[i])));
+                if(saveObject.WhichShapeToSpawn[i] > 0)
+                {
+                    testShapes[i].GetComponent<SpriteRenderer>().sprite = shapeSprites[saveObject.WhichShapeToSpawn[i] - 1].GetComponent<SpriteRenderer>().sprite;
+                }
+                
                 PlaceLittleThing(saveObject.TimeToSpawn[i], i);
             }
         }
