@@ -6,45 +6,30 @@ using UnityEngine;
 public class MainMenuScript : MonoBehaviour
 {
     [SerializeField]int sceneNumber;
-    // Start is called before the first frame update
-   // [SerializeField] GameObject exitButton;
-
-    // Update is called once per frame
-    /*void Update()
-    {
-       // EnableExitButton();
-    }*/
+    [SerializeField] GameObject escapeMenu;
     public void LoadTheScene()
     {
        SceneManager.LoadScene(sceneNumber);
 
     }
-    /*public void PlayEditScene()
-    {
-        SceneManager.LoadScene(1);
 
-    }
-    public void ReturnToMainScene()
+    private void Update()
     {
-        SceneManager.LoadScene(0);
-
-    }/*
-   /* public void EnableExitButton()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if(escapeMenu != null)
         {
-            if (exitButton.activeSelf)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                exitButton.SetActive(false);
+                if (escapeMenu.activeSelf)
+                {
+                    escapeMenu.SetActive(false);
+                }
+                else
+                {
+                    escapeMenu.SetActive(true);
+                }
             }
-            else
-            {
-                exitButton.SetActive(true);
-            }
-        }
-        
-
-    }*/
+        }   
+    }
 
 
 }
