@@ -1,0 +1,1 @@
+{"mp3File":"Naughty Boy - La la la ft. Sam Smith (Official Video).mp3","StartPoints":[{"x":-1.947861909866333,"y":1.0193318128585816},{"x":-1.5670766830444337,"y":-1.6754541397094727}],"Rotation":[0.0,0.0],"TimeToSpawn":[51.87783432006836,107.09774780273438],"WhichShapeToSpawn":[0,0]}

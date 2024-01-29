@@ -54,6 +54,10 @@ public class LevelEditor : MonoBehaviour
 
     [SerializeField] GameObject[] shapeSprites;
 
+    [SerializeField] TextMeshProUGUI songTimeText;
+
+    [SerializeField] GameObject tutorial;
+
     SaveObject saveObject = new SaveObject
     {
         /* StartPoints = startPoints,
@@ -68,7 +72,7 @@ public class LevelEditor : MonoBehaviour
         {
             Directory.CreateDirectory(Application.streamingAssetsPath + "/SongsData");
         }
-        listOfFiles.Add("Create New");
+        //listOfFiles.Add("Create New");
         var fileinfo = new DirectoryInfo(Application.streamingAssetsPath + "/SongsData").GetFiles("*.txt");
         foreach (FileInfo f in fileinfo)
         {
@@ -89,7 +93,8 @@ public class LevelEditor : MonoBehaviour
         {
             audioTimer += Time.deltaTime * music.pitch;
             scrollBar.value = 1 / music.clip.length * audioTimer;
-            
+
+            SongTime();
         }
         
         createShapes();
@@ -101,6 +106,9 @@ public class LevelEditor : MonoBehaviour
         if (!music.isPlaying)
         {
             audioTimer = scrollBar.value * music.clip.length;
+
+            SongTime();
+
         }
         if (canedit)
         {
@@ -122,6 +130,38 @@ public class LevelEditor : MonoBehaviour
             }
         }
         
+    }
+    void SongTime()
+    {
+        if (Mathf.Round(audioTimer) < 60)
+        {
+
+            if (Mathf.Round(audioTimer) < 10)
+            {
+                songTimeText.text = "00:0" + Mathf.Round(audioTimer).ToString();
+            }
+            else
+            {
+                songTimeText.text = "00:" + Mathf.Round(audioTimer).ToString();
+            }
+        }
+        else
+        {
+            float devidedBysixty = Mathf.Round(Mathf.Round(audioTimer) / 60);
+            if (devidedBysixty * 60 > Mathf.Round(audioTimer))
+            {
+                devidedBysixty -= 1;
+            }
+            if (Mathf.Round(audioTimer) - devidedBysixty * 60 < 10)
+            {
+                songTimeText.text = "0" + devidedBysixty.ToString() + ":0" + (Mathf.Round(audioTimer) - 60 * devidedBysixty).ToString();
+            }
+            else
+            {
+                songTimeText.text = "0" + devidedBysixty.ToString() + ":" + (Mathf.Round(audioTimer) - 60 * devidedBysixty).ToString();
+            }
+
+        }
     }
     public void ChangeMusicSpeed()
     {
@@ -291,14 +331,7 @@ public class LevelEditor : MonoBehaviour
     }
     public void startEditing()
     {
-        if(saveFilesDropDown.value == 0)
-        {
-            createNewMenu.SetActive(true);
-        }
-        else
-        {
             saveObject = JsonUtility.FromJson<SaveObject>(File.ReadAllText(Application.streamingAssetsPath + "/SongsData/" + listOfFiles[saveFilesDropDown.value]));
-            //Debug.Log(saveObject.StartPoints[0]);
             currentFile = listOfFiles[saveFilesDropDown.value];
             
 
@@ -321,7 +354,11 @@ public class LevelEditor : MonoBehaviour
                 
                 PlaceLittleThing(saveObject.TimeToSpawn[i], i);
             }
-        }
+        startMenu.SetActive(false);
+    }
+    public void createNewButton()
+    {
+        createNewMenu.SetActive(true);
         startMenu.SetActive(false);
     }
     public void CreateNewFile()
@@ -382,16 +419,25 @@ public class LevelEditor : MonoBehaviour
 
     public void DeleteSaveFile()
     {
-        if(saveFilesDropDown.value != 0)
-        {
-            
+       
             File.Delete(Application.streamingAssetsPath + "/SongsData/" + listOfFiles[saveFilesDropDown.value]);
             listOfFiles.Remove(listOfFiles[saveFilesDropDown.value]);
             saveFilesDropDown.ClearOptions();
             saveFilesDropDown.AddOptions(listOfFiles);
             Debug.Log(saveFilesDropDown.value);
+
+    }
+
+    public void ShowTutorial()
+    {
+        if (tutorial.activeSelf)
+        {
+            tutorial.SetActive(false);
         }
-        
+        else
+        {
+            tutorial.SetActive(true);
+        }
     }
     
     

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using TMPro;
+using UnityEngine.UI;
 
 public class TheManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class TheManager : MonoBehaviour
      SaveObject saveObject;
 
     [SerializeField] GameObject[] livesImages;
+    [SerializeField] Color[] lifeColor;
     [SerializeField] TextMeshProUGUI pointText;
     int health = 5;
     int points;
@@ -33,6 +35,7 @@ public class TheManager : MonoBehaviour
 
     bool haveStartedMusic;
     [SerializeField] TextMeshProUGUI endPointsText;
+    
 
     private void Awake()
     {
@@ -107,6 +110,15 @@ public class TheManager : MonoBehaviour
     {
         
         health -= 1;
+        if(health != 0)
+        {
+            foreach (GameObject g in livesImages)
+            {
+                g.GetComponent<Image>().color = lifeColor[health - 1];
+            }
+        }
+        
+
         if (health == 0)
         {
             Debug.Log("Dead");
@@ -126,10 +138,12 @@ public class TheManager : MonoBehaviour
             }
             music.Stop();
         }
-          
 
-        if(health >= 0)
-         Destroy(livesImages[health]);
+
+        if (health >= 0)
+            livesImages[health].GetComponent<Image>().enabled = false;
+
+        // Destroy(livesImages[health]);
     }
     public void GainPoints(int pointsToGain)
     {

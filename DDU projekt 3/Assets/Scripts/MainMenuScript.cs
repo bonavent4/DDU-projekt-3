@@ -7,13 +7,17 @@ public class MainMenuScript : MonoBehaviour
 {
     [SerializeField]int sceneNumber;
     [SerializeField] GameObject escapeMenu;
+    private void Awake()
+    {
+        Cursor.visible = true;
+    }
     public void LoadTheScene()
     {
        SceneManager.LoadScene(sceneNumber);
 
     }
 
-    private void Update()
+   /* private void Update()
     {
         if(escapeMenu != null)
         {
@@ -29,7 +33,7 @@ public class MainMenuScript : MonoBehaviour
                 }
             }
         }   
-    }
+    }*/
 
 
 }
